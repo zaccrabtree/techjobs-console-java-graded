@@ -4,7 +4,7 @@ For [this assignment](https://education.launchcode.org/java-web-development/assi
 
 ## Assignment Requirements
 
-1. Implement the 'printJobs' method
+1. Implement the `printJobs` method
 2. Create the `findByValue` method
 3. Make search methods `Case-Insensitive`
 

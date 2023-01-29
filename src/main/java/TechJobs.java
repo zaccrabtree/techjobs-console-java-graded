@@ -43,6 +43,8 @@ public class TechJobs {
                 } else {
 
                     ArrayList<String> results = JobData.findAll(columnChoice);
+                   
+                    results.sort(String::compareToIgnoreCase);  //before printing results, sorts them alphabetically
 
                     System.out.println("\n*** All " + columnChoices.get(columnChoice) + " Values ***");
 
@@ -119,7 +121,17 @@ public class TechJobs {
 
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
-
-        System.out.println("printJobs is not implemented yet");
+    
+            if (someJobs.size() == 0) { //conditional for an empty ArrayList
+                System.out.println("No results found."); //Result to be printed if ArrayList is empty
+            } else {
+                for (HashMap<String, String> job : someJobs) { //for-each loop iterating over each Hashmap in a non-empty ArrayList
+                    System.out.println("*****"); //add the border before printing each hashmap
+                    for (Map.Entry<String, String> jobEntry : job.entrySet()) { //nested for-each loop iterates over each key-value pair in a given hashmap
+                        System.out.println(jobEntry.getKey() + ": " + jobEntry.getValue()); //concatenates key with colon and then the value
+                    }
+                    System.out.println("*****"); // ends each hashmap-- this is on the outer for-each loop-- with same asterisk pattern
+                }
+            }  
     }
 }

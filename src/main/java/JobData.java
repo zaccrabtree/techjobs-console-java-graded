@@ -93,13 +93,28 @@ public class JobData {
      * @param value The search term to look for
      * @return      List of all jobs with at least one field containing the value
      */
-    public static ArrayList<HashMap<String, String>> findByValue(String value) {
+    public static ArrayList<HashMap<String, String>> findByValue(String value) { //method takes an ArrayList of String-String Hashmaps
 
         // load data, if not already loaded
         loadData();
 
         // TODO - implement this method
-        return null;
+        //needs to enable a case insensitive search that looks for the term in all columns
+        //but only returns a job once, even if it has multiple matches. Also, if a new column 
+        //is added, the search should still work.
+        ArrayList<HashMap<String, String>> jobs = new ArrayList<>(); //makes a new ArrayList called jobs of String-String Hashmaps. This will contain all the jobs that match the search string.
+
+        for (HashMap<String, String> row : allJobs) { //for-each loop iterates over Hashmaps in a row in all the jobs
+            for (String key : row.keySet()) { //nested for-each loop goes over all the string keys in a given hashmap
+                String aValue = row.get(key); //creates a variable to store the value paired to each key in the hashmap
+                if (aValue.toLowerCase().contains(value.toLowerCase()) && !jobs.contains(row)) { //compares the value stored in a variable in all lower case to the parameter input into the method as a search string
+                    jobs.add(row); //if the search string (per the last line) matches the key string, AND the ArrayList being created does not already contain the hashmap in which the value-string match was found, it will add the hashmap to the result jobs ArrayList
+                }
+            }
+        }
+
+        return jobs; //After iterating through each Hashmap in allJobs and each key-value pair in each Hashmap to compare the string parameter with the values, it returns the ArrayList of Hashmaps containing the results.
+
     }
 
     /**
